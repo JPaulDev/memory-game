@@ -1,17 +1,6 @@
 import styled from 'styled-components';
 import { ReactComponent as GithubLogo } from '../img/github-logo.svg';
 
-function Footer() {
-  return (
-    <StyledFooter>
-      <p>Built by JPaulDev</p>
-      <Link href="https://github.com/JPaulDev/memory-game">
-        <StyledLogo />
-      </Link>
-    </StyledFooter>
-  );
-}
-
 const StyledFooter = styled.footer`
   display: flex;
   justify-content: center;
@@ -38,5 +27,16 @@ const StyledLogo = styled(GithubLogo)`
     width: 28px;
   }
 `;
+
+function Footer() {
+  return (
+    <StyledFooter>
+      <p>Built by JPaulDev</p>
+      <Link href="https://github.com/JPaulDev/memory-game">
+        <StyledLogo />
+      </Link>
+    </StyledFooter>
+  );
+}
 
 export default Footer;
