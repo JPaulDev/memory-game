@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import GameCard from './GameCard';
 
 const StyledGameboard = styled.div`
   display: grid;
@@ -8,7 +9,11 @@ const StyledGameboard = styled.div`
 `;
 
 function Gameboard() {
-  return <StyledGameboard />;
+  return (
+    <StyledGameboard>
+      <GameCard />
+    </StyledGameboard>
+  );
 }
 
 export default Gameboard;
