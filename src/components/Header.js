@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import bannerImage from '../img/header-banner.png';
 
 const StyledHeader = styled.header`
   min-height: 130px;
@@ -6,6 +7,7 @@ const StyledHeader = styled.header`
   justify-content: center;
   align-items: center;
   background-color: rgb(239, 14, 50);
+  padding: 20px;
 `;
 
 const CircleContainer = styled.div`
@@ -38,7 +40,9 @@ const InnerCircle = styled.div`
 function Header() {
   return (
     <>
-      <StyledHeader />
+      <StyledHeader>
+        <img src={bannerImage} alt="Pokemon memory banner" />
+      </StyledHeader>
       <CircleContainer>
         <OuterCircle>
           <InnerCircle />
