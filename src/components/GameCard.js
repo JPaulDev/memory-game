@@ -12,7 +12,7 @@ const Card = styled.div`
   border-radius: 15px;
 `;
 
-const PokemonImage = styled.img`
+const Image = styled.img`
   width: 130px;
   height: 130px;
 `;
@@ -22,11 +22,11 @@ const Name = styled.p`
   font-size: 20px;
 `;
 
-function GameCard() {
+function GameCard({ name, sprite }) {
   return (
     <Card>
-      <PokemonImage />
-      <Name>Name</Name>
+      <Image src={sprite} alt={name} />
+      <Name>{name}</Name>
     </Card>
   );
 }

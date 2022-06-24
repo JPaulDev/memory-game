@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Fragment } from 'react';
 import GameCard from './GameCard';
 
 const StyledGameboard = styled.div`
@@ -8,10 +9,14 @@ const StyledGameboard = styled.div`
   gap: 30px;
 `;
 
-function Gameboard() {
+function Gameboard({ cards }) {
   return (
     <StyledGameboard>
-      <GameCard />
+      {cards.map((card) => (
+        <Fragment key={card.id}>
+          <GameCard name={card.name} sprite={card.sprites.front_default} />
+        </Fragment>
+      ))}
     </StyledGameboard>
   );
 }
