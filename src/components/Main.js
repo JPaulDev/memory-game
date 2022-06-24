@@ -9,6 +9,8 @@ const StyledMain = styled.main`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  flex: 1;
+  background-color: rgb(238, 238, 238);
 `;
 
 function generateIds() {

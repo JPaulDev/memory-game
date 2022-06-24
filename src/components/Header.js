@@ -16,6 +16,7 @@ const CircleContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #3f3f46;
+  z-index: 10;
 `;
 
 const OuterCircle = styled.div`
