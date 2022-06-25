@@ -26,9 +26,9 @@ const Name = styled.p`
   font-weight: 400;
 `;
 
-function GameCard({ name, sprite }) {
+function GameCard({ name, sprite, onPlayRound }) {
   return (
-    <Card>
+    <Card onClick={() => onPlayRound(name)}>
       <Image src={sprite} alt={name} />
       <Name>{name}</Name>
     </Card>

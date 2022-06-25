@@ -26,6 +26,9 @@ function generateIds() {
 
 function Main() {
   const [cards, setCards] = useState(null);
+  const [clickedCards, setClickedCards] = useState([]);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -42,12 +45,23 @@ function Main() {
     fetchPokemon();
   }, []);
 
+  const handlePlayRound = (name) => {
+    if (clickedCards.includes(name)) {
+      setBestScore(currentScore > bestScore ? currentScore : bestScore);
+      setCurrentScore(0);
+      setClickedCards([]);
+    } else {
+      setCurrentScore(currentScore + 1);
+      setClickedCards([...clickedCards, name]);
+    }
+  };
+
   return (
     <StyledMain>
       {cards ? (
         <>
-          <ScoreDisplay />
-          <Gameboard cards={cards} />
+          <ScoreDisplay currentScore={currentScore} bestScore={bestScore} />
+          <Gameboard cards={cards} onPlayRound={handlePlayRound} />
         </>
       ) : (
         <LoadingScreen />

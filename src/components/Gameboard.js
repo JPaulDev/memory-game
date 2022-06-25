@@ -9,12 +9,16 @@ const StyledGameboard = styled.div`
   gap: 30px;
 `;
 
-function Gameboard({ cards }) {
+function Gameboard({ cards, onPlayRound }) {
   return (
     <StyledGameboard>
       {cards.map((card) => (
         <Fragment key={card.id}>
-          <GameCard name={card.name} sprite={card.sprites.front_default} />
+          <GameCard
+            name={card.name}
+            sprite={card.sprites.front_default}
+            onPlayRound={onPlayRound}
+          />
         </Fragment>
       ))}
     </StyledGameboard>
