@@ -12,11 +12,16 @@ const Card = styled.div`
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   user-select: none;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.07);
+  }
 `;
 
 const Image = styled.img`
   width: 130px;
-  height: auto;
+  height: 130px;
 `;
 
 const Name = styled.p`

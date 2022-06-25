@@ -10,8 +10,13 @@ const StyledHeader = styled.header`
   padding: 20px;
 `;
 
+const Image = styled.img`
+  width: 550px;
+  height: 106px;
+`;
+
 const CircleContainer = styled.div`
-  height: 20px;
+  height: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,7 +47,7 @@ function Header() {
   return (
     <>
       <StyledHeader>
-        <img src={bannerImage} alt="Pokemon memory banner" />
+        <Image src={bannerImage} alt="Pokemon memory banner" />
       </StyledHeader>
       <CircleContainer>
         <OuterCircle>
