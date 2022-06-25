@@ -24,6 +24,16 @@ function generateIds() {
   return pokemonIds;
 }
 
+function shuffleCards(cards) {
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+
+  return cards;
+}
+
 function Main() {
   const [cards, setCards] = useState(null);
   const [clickedCards, setClickedCards] = useState([]);
@@ -45,6 +55,13 @@ function Main() {
     fetchPokemon();
   }, []);
 
+  const handleShuffleCards = () => {
+    const cardsCopy = [...cards];
+    const shuffledCards = shuffleCards(cardsCopy);
+
+    setCards(shuffledCards);
+  };
+
   const handlePlayRound = (name) => {
     if (clickedCards.includes(name)) {
       setBestScore(currentScore > bestScore ? currentScore : bestScore);
@@ -54,6 +71,8 @@ function Main() {
       setCurrentScore(currentScore + 1);
       setClickedCards([...clickedCards, name]);
     }
+
+    handleShuffleCards();
   };
 
   return (
