@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Pokedex } from 'pokeapi-js-wrapper';
 import ScoreDisplay from './ScoreDisplay';
 import Gameboard from './Gameboard';
+import LoadingScreen from './LoadingScreen';
 
 const StyledMain = styled.main`
   display: flex;
@@ -49,7 +50,7 @@ function Main() {
           <Gameboard cards={cards} />
         </>
       ) : (
-        <div>Loading...</div>
+        <LoadingScreen />
       )}
     </StyledMain>
   );
