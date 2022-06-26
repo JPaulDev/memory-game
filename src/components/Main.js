@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { Pokedex } from 'pokeapi-js-wrapper';
+import LoadingScreen from './LoadingScreen';
 import ScoreDisplay from './ScoreDisplay';
 import Gameboard from './Gameboard';
-import LoadingScreen from './LoadingScreen';
 
 const StyledMain = styled.main`
   display: flex;
@@ -14,7 +14,7 @@ const StyledMain = styled.main`
   background-color: rgb(238, 238, 238);
 `;
 
-function generateIds() {
+function generatePokemonIds() {
   const pokemonIds = new Set();
 
   while (pokemonIds.size < 12) {
@@ -24,26 +24,16 @@ function generateIds() {
   return pokemonIds;
 }
 
-function shuffleCards(cards) {
-  for (let i = cards.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-
-    [cards[i], cards[j]] = [cards[j], cards[i]];
-  }
-
-  return cards;
-}
-
 function Main() {
-  const [cards, setCards] = useState(null);
-  const [clickedCards, setClickedCards] = useState([]);
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+  const [cards, setCards] = useState(null);
+  const [clickedCards, setClickedCards] = useState([]);
 
   useEffect(() => {
     const fetchPokemon = async () => {
       const pokedex = new Pokedex();
-      const pokemonIds = Array.from(generateIds());
+      const pokemonIds = Array.from(generatePokemonIds());
       const promises = pokemonIds.map((id) => pokedex.getPokemonByName(id));
       const pokemon = await Promise.all(promises);
 
@@ -57,9 +47,13 @@ function Main() {
 
   const handleShuffleCards = () => {
     const cardsCopy = [...cards];
-    const shuffledCards = shuffleCards(cardsCopy);
 
-    setCards(shuffledCards);
+    for (let i = cardsCopy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cardsCopy[i], cardsCopy[j]] = [cardsCopy[j], cardsCopy[i]];
+    }
+
+    setCards(cardsCopy);
   };
 
   const handlePlayRound = (name) => {

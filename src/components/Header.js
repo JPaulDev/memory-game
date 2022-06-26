@@ -25,11 +25,11 @@ const CircleContainer = styled.div`
 `;
 
 const OuterCircle = styled.div`
+  width: 60px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
   background-color: white;
   border: 6px solid #3f3f46;
   border-radius: 100%;

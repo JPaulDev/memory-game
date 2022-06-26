@@ -12,10 +12,10 @@ const StyledFooter = styled.footer`
 `;
 
 const Link = styled.a`
-  display: grid;
-  place-items: center;
   width: 30px;
   height: 30px;
+  display: grid;
+  place-items: center;
 `;
 
 const StyledLogo = styled(GithubLogo)`

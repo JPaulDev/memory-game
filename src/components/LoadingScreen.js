@@ -33,11 +33,11 @@ const Pokeball = styled.div`
 `;
 
 const OuterCircle = styled.div`
+  width: 16px;
+  height: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 16px;
-  height: 16px;
   background-color: white;
   border: 2px solid black;
   border-radius: 100%;
