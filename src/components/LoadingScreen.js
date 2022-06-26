@@ -53,7 +53,7 @@ const InnerCircle = styled.div`
 function LoadingScreen() {
   return (
     <>
-      <LoadingText>LOADING</LoadingText>
+      <LoadingText>Catching Pokémon</LoadingText>
       <Pokeball>
         <OuterCircle>
           <InnerCircle />
