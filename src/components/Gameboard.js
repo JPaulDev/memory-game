@@ -6,6 +6,7 @@ const StyledGameboard = styled.div`
   display: grid;
   grid-template-columns: repeat(4, max-content);
   grid-template-rows: repeat(3, max-content);
+  grid-auto-flow: column;
   gap: 30px;
 `;
 

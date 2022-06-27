@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { Pokedex } from 'pokeapi-js-wrapper';
 import LoadingScreen from './LoadingScreen';
+import DifficultyMenu from './DifficultyMenu';
 import ScoreDisplay from './ScoreDisplay';
 import Gameboard from './Gameboard';
 
@@ -14,10 +15,10 @@ const StyledMain = styled.main`
   background-color: rgb(238, 238, 238);
 `;
 
-function generatePokemonIds() {
+function generatePokemonIds(number) {
   const pokemonIds = new Set();
 
-  while (pokemonIds.size < 12) {
+  while (pokemonIds.size < number) {
     pokemonIds.add(Math.floor(Math.random() * 151 + 1));
   }
 
@@ -25,29 +26,59 @@ function generatePokemonIds() {
 }
 
 function Main() {
+  const [difficulty, setDifficulty] = useState(12);
+  const [loading, setLoading] = useState(true);
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [cards, setCards] = useState(null);
   const [clickedCards, setClickedCards] = useState([]);
 
+  // Mock loading screen for decoration only
+  const handleLoading = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  };
+
   useEffect(() => {
     const fetchPokemon = async () => {
       const pokedex = new Pokedex();
-      const pokemonIds = Array.from(generatePokemonIds());
+      const pokemonIds = Array.from(generatePokemonIds(difficulty));
       const promises = pokemonIds.map((id) => pokedex.getPokemonByName(id));
       const pokemon = await Promise.all(promises);
 
-      setTimeout(() => {
-        setCards(pokemon);
-      }, 2000);
+      handleLoading();
+      setCards(pokemon);
     };
 
     fetchPokemon();
-  }, []);
+  }, [difficulty]);
+
+  const handleChangeDifficulty = (setting) => {
+    let numberOfCards;
+
+    if (setting === 'easy') {
+      numberOfCards = 12;
+    } else if (setting === 'medium') {
+      numberOfCards = 15;
+    } else if (setting === 'hard') {
+      numberOfCards = 18;
+    } else if (setting === 'legendary') {
+      numberOfCards = 21;
+    }
+
+    handleLoading();
+    setDifficulty(numberOfCards);
+    setBestScore(0);
+    setCurrentScore(0);
+  };
 
   const handleShuffleCards = () => {
     const cardsCopy = [...cards];
 
+    // Fisher-Yates shuffle to randomize cards
     for (let i = cardsCopy.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [cardsCopy[i], cardsCopy[j]] = [cardsCopy[j], cardsCopy[i]];
@@ -71,13 +102,17 @@ function Main() {
 
   return (
     <StyledMain>
-      {cards ? (
+      <DifficultyMenu
+        difficulty={difficulty}
+        onChangeDifficulty={handleChangeDifficulty}
+      />
+      {loading ? (
+        <LoadingScreen />
+      ) : (
         <>
           <ScoreDisplay currentScore={currentScore} bestScore={bestScore} />
           <Gameboard cards={cards} onPlayRound={handlePlayRound} />
         </>
-      ) : (
-        <LoadingScreen />
       )}
     </StyledMain>
   );
