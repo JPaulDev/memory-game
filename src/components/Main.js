@@ -14,6 +14,7 @@ const StyledMain = styled.main`
   align-items: center;
   flex: 1;
   background-color: rgb(238, 238, 238);
+  padding: 20px;
 `;
 
 function generatePokemonIds(number) {

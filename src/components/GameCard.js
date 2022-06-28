@@ -20,8 +20,8 @@ const Card = styled.div`
 `;
 
 const Image = styled.img`
-  width: 130px;
-  height: 130px;
+  width: 120px;
+  height: 120px;
 `;
 
 const Name = styled.p`

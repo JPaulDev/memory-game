@@ -3,16 +3,19 @@ import { Fragment } from 'react';
 import GameCard from './GameCard';
 
 const StyledGameboard = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, max-content);
-  grid-template-rows: repeat(3, max-content);
-  grid-auto-flow: column;
-  gap: 30px;
+  max-width: ${(props) => props.maxWidth};
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 `;
 
 function Gameboard({ cards, onPlayRound }) {
+  const maxWidth = (cards.length / 3) * 150;
+
   return (
-    <StyledGameboard>
+    <StyledGameboard maxWidth={`${maxWidth}px`}>
       {cards.map((card) => (
         <Fragment key={card.id}>
           <GameCard

@@ -4,7 +4,7 @@ import { ReactComponent as MenuIcon } from '../img/menu-icon.svg';
 import { ReactComponent as CloseIcon } from '../img/close-icon.svg';
 
 const OpenButton = styled.button`
-  position: fixed;
+  position: absolute;
   left: 8px;
   top: 8px;
   border: none;
@@ -31,7 +31,7 @@ const StyledIcon = styled.div`
 `;
 
 const Menu = styled.div`
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
   display: flex;
@@ -49,8 +49,8 @@ const Menu = styled.div`
 `;
 
 const Button = styled.button`
-  width: 130px;
-  height: 35px;
+  min-width: 130px;
+  min-height: 35px;
   cursor: pointer;
   border-radius: 5px;
   background-color: #22c55e;
