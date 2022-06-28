@@ -57,7 +57,7 @@ function Main() {
   }, [difficulty]);
 
   const handleChangeDifficulty = (setting) => {
-    let numberOfCards;
+    let numberOfCards = 0;
 
     if (setting === 'easy') {
       numberOfCards = 12;
@@ -69,10 +69,12 @@ function Main() {
       numberOfCards = 21;
     }
 
-    handleLoading();
-    setDifficulty(numberOfCards);
-    setBestScore(0);
-    setCurrentScore(0);
+    if (numberOfCards !== difficulty) {
+      handleLoading();
+      setDifficulty(numberOfCards);
+      setBestScore(0);
+      setCurrentScore(0);
+    }
   };
 
   const handleShuffleCards = () => {
