@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { Pokedex } from 'pokeapi-js-wrapper';
+import InstructionsModal from './InstructionsModal';
 import LoadingScreen from './LoadingScreen';
 import DifficultyMenu from './DifficultyMenu';
 import ScoreDisplay from './ScoreDisplay';
@@ -26,6 +27,7 @@ function generatePokemonIds(number) {
 }
 
 function Main() {
+  const [gameStarted, setGameStarted] = useState(false);
   const [difficulty, setDifficulty] = useState(12);
   const [loading, setLoading] = useState(true);
   const [currentScore, setCurrentScore] = useState(0);
@@ -53,8 +55,12 @@ function Main() {
       setCards(pokemon);
     };
 
-    fetchPokemon();
-  }, [difficulty]);
+    if (gameStarted) fetchPokemon();
+  }, [gameStarted, difficulty]);
+
+  const handleStartGame = () => {
+    setGameStarted(true);
+  };
 
   const handleChangeDifficulty = (setting) => {
     let numberOfCards = 0;
@@ -102,20 +108,28 @@ function Main() {
     handleShuffleCards();
   };
 
+  let content = null;
+
+  if (!gameStarted) {
+    content = <InstructionsModal onStartGame={handleStartGame} />;
+  } else if (gameStarted && loading) {
+    content = <LoadingScreen />;
+  } else if (gameStarted && !loading) {
+    content = (
+      <>
+        <ScoreDisplay currentScore={currentScore} bestScore={bestScore} />
+        <Gameboard cards={cards} onPlayRound={handlePlayRound} />
+      </>
+    );
+  }
+
   return (
     <StyledMain>
       <DifficultyMenu
         difficulty={difficulty}
         onChangeDifficulty={handleChangeDifficulty}
       />
-      {loading ? (
-        <LoadingScreen />
-      ) : (
-        <>
-          <ScoreDisplay currentScore={currentScore} bestScore={bestScore} />
-          <Gameboard cards={cards} onPlayRound={handlePlayRound} />
-        </>
-      )}
+      {content}
     </StyledMain>
   );
 }
