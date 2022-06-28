@@ -21,7 +21,7 @@ const Link = styled.a`
 const StyledLogo = styled(GithubLogo)`
   width: 25px;
   cursor: pointer;
-  transition: all 0.15s ease-in-out;
+  transition: width 150ms ease-in-out;
 
   &:hover {
     width: 28px;
